@@ -4,12 +4,12 @@ const cors = require("cors");
 const morgan = require('morgan');
 const app = express();
 
-//app.use(express.json());
+app.use(express.json());
 //get all restaurants
 app.use(cors());
 app.get("/api/v1/restaurants", (req, res,) => {
  console.log("route handler ran");
-    res.status(200).json({
+    res.status(201).json({
         status:"success",
         data: {
             restaurants:["michoacana", "7eleven"],
@@ -19,15 +19,47 @@ app.get("/api/v1/restaurants", (req, res,) => {
 //http://localhost:5000/getRestaurants
 
 //get a restaurant method
-app.get("/api/v1/restaurants/:restaurantid", (req,res) => {
+app.get("/api/v1/restaurants/:id", (req,res) => {
     console.log(req.params);
+    res.status(200).json({
+        status: "success",
+        data: {
+            restaurant: "guendis"
+        }
+    })
 })
 
 
 //create a restaurant
-app.post("api/v1/restaurants", (req,res)=> {
+app.post("/api/v1/restaurants", (req,res)=> {
     console.log(req.body);
+    res.status(201).json({
+        status: "success",
+        data: {
+            restaurant: "guendis"
+        }
+    })
 });
+
+//update restaurant
+app.put("/api/v1/restaurants/:id",(req,res) => {
+    console.log(req.params.id);
+    console.log(req.body);
+    res.status(200).json({
+        status: "success",
+        data: {
+            restaurant: "guendis"
+        }
+    })
+});
+
+//delete restaurant
+app.delete("/api/v1/restaurants/:id", (req,res)=> {
+    res.status(204).json({
+        status: "success",
+    })
+})
+
 
 
 const port = process.env.PORT || 5000;
